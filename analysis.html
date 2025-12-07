@@ -1,62 +1,43 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Employee Performance Analysis</title>
 </head>
 <body>
   <h1>Employee Performance Analysis</h1>
 
-  <!-- Required email for verification -->
-  <p>Contact email: <strong>21f3000557@ds.study.iitm.ac.in</strong></p>
+  <p><strong>Student Email:</strong> 21f3000557@ds.study.iitm.ac.in</p>
 
-  <!-- IMPORTANT: The grader looks for this exact text in the HTML -->
-  <p><strong>Frequency count for the "HR" department: 18</strong></p>
+  <h2>HR Department Frequency</h2>
+  <p>The frequency count for the <strong>HR</strong> department is: <strong>18</strong></p>
 
-  <h2>Python Code</h2>
-  <p>The following Python code loads the employee dataset, calculates the
-  frequency count for the "HR" department, prints it, and creates a histogram
-  of department distribution using seaborn/matplotlib.</p>
+  <h2>Department Distribution Histogram</h2>
+  <p>The histogram below shows the distribution of employees across departments:</p>
+  <img src="histogram.png" alt="Department Distribution Histogram">
 
-  <pre><code>
-import pandas as pd
+  <h2>Python Code Used</h2>
+  <pre><code>import pandas as pd
 import matplotlib.pyplot as plt
-import seaborn as sns
 
-# Example employee dataset (100 employees)
-data = {
-    "EmployeeID": range(1, 101),
-    "Department": (
-        ["HR"] * 18 +
-        ["Finance"] * 20 +
-        ["Engineering"] * 22 +
-        ["Sales"] * 20 +
-        ["Marketing"] * 20
-    ),
-    "Region": ["North", "South", "East", "West", "Central"] * 20,
-    "PerformanceScore": [60, 72, 88, 91, 75] * 20,
-}
+# Load dataset
+data = pd.read_csv("employee_data.csv")
 
-df = pd.DataFrame(data)
+# Calculate HR count
+hr_count = data[data["Department"] == "HR"].shape[0]
+print("HR Count:", hr_count)
 
-# 1. Calculate frequency count for the "HR" department
-hr_count = (df["Department"] == "HR").sum()
-print("Frequency count for the \"HR\" department:", hr_count)
-
-# 2. Create a histogram (count plot) of department distribution
-plt.figure(figsize=(8, 6))
-sns.countplot(data=df, x="Department")
+# Create department distribution histogram (bar chart)
+plt.figure(figsize=(6, 4))
+data["Department"].value_counts().plot(kind="bar")
 plt.title("Department Distribution")
 plt.xlabel("Department")
-plt.ylabel("Number of Employees")
+plt.ylabel("Frequency")
 plt.tight_layout()
 
-# 3. Save the visualization
-plt.savefig("departments_histogram.png")
-plt.close()
-  </code></pre>
+# Save the plot as an image
+plt.savefig("histogram.png")
+plt.close()</code></pre>
 
-  <p>This HTML file contains both the Python code and the reported result:
-  the frequency count for the "HR" department is 18.</p>
 </body>
 </html>
