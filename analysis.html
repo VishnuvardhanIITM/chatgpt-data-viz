@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Employee Performance Analysis</title>
+</head>
+<body>
+  <h1>Employee Performance Analysis</h1>
+
+  <p><strong>Student Email:</strong> 21f3000557@ds.study.iitm.ac.in</p>
+
+  <h2>HR Department Frequency</h2>
+  <p>The frequency count for the <strong>HR</strong> department is: <strong>18</strong></p>
+
+  <h2>Department Distribution Histogram</h2>
+  <p>The histogram below shows the distribution of employees across departments:</p>
+  <img src="histogram.png" alt="Department Distribution Histogram">
+
+  <h2>Python Code Used</h2>
+  <pre><code>import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load dataset
+data = pd.read_csv("employee_data.csv")
+
+# Calculate HR count
+hr_count = data[data["Department"] == "HR"].shape[0]
+print("HR Count:", hr_count)
+
+# Create department distribution histogram (bar chart)
+plt.figure(figsize=(6, 4))
+data["Department"].value_counts().plot(kind="bar")
+plt.title("Department Distribution")
+plt.xlabel("Department")
+plt.ylabel("Frequency")
+plt.tight_layout()
+
+# Save the plot as an image
+plt.savefig("histogram.png")
+plt.close()</code></pre>
+
+</body>
+</html>
